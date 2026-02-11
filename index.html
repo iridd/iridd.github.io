@@ -4,94 +4,292 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>好药保报销计算器</title>
-    <script src="https://storage.360buyimg.com/smartdata/jda_imgs/tailwind.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 800px;
+            background-color: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(to right, #4b6cb7, #182848);
+            color: white;
+            padding: 25px 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+        
+        .header p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        .input-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-bottom: 35px;
+        }
+        
+        .input-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .input-group label {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #333;
+            display: flex;
+            align-items: center;
+        }
+        
+        .input-group label i {
+            margin-right: 8px;
+            color: #4b6cb7;
+        }
+        
+        .input-group input {
+            padding: 15px;
+            border: 2px solid #e1e5ee;
+            border-radius: 10px;
+            font-size: 18px;
+            transition: all 0.3s;
+            outline: none;
+        }
+        
+        .input-group input:focus {
+            border-color: #4b6cb7;
+            box-shadow: 0 0 0 3px rgba(75, 108, 183, 0.1);
+        }
+        
+        .unit {
+            font-size: 14px;
+            color: #666;
+            margin-left: 5px;
+        }
+        
+        .results-section {
+            background-color: #f8f9ff;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .results-section h2 {
+            color: #182848;
+            margin-bottom: 20px;
+            font-size: 22px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #e1e5ee;
+        }
+        
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        
+        .result-item {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            border-left: 4px solid #4b6cb7;
+        }
+        
+        .result-title {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 8px;
+        }
+        
+        .result-value {
+            font-size: 22px;
+            font-weight: 700;
+            color: #182848;
+        }
+        
+        .result-unit {
+            font-size: 16px;
+            color: #4b6cb7;
+            margin-left: 3px;
+        }
+        
+        .highlight {
+            background-color: #fff8e6;
+            border-left-color: #ffc107;
+        }
+        
+        .highlight .result-value {
+            color: #e6a700;
+        }
+        
+        .recommendation {
+            background-color: #e8f4ff;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 25px;
+            border-left: 4px solid #1890ff;
+        }
+        
+        .recommendation h3 {
+            color: #1890ff;
+            margin-bottom: 10px;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .recommendation h3 i {
+            margin-right: 8px;
+        }
+        
+        .recommendation p {
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .disclaimer {
+            font-size: 13px;
+            color: #888;
+            margin-top: 25px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+            line-height: 1.5;
+        }
+        
+        .footer {
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            padding: 15px;
+            border-top: 1px solid #eee;
+        }
+        
+        @media (max-width: 768px) {
+            .input-section, .results-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .container {
+                margin: 10px;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+        }
+    </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
-<body class="bg-gradient-to-br from-gray-100 to-blue-100 min-h-screen flex justify-center items-center p-5">
-    <div class="w-full max-w-2xl bg-white rounded-2xl shadow-xl overflow-hidden">
-        <!-- Header -->
-        <div class="bg-gradient-to-r from-blue-500 to-blue-900 text-white px-8 py-7 text-center">
-            <h1 class="text-2xl md:text-3xl font-bold mb-2 flex items-center justify-center">
-                <i class="fas fa-calculator mr-3"></i>好药保报销计算器
-            </h1>
-            <p class="text-base opacity-90">输入药品信息，立即计算报销金额和节省成本</p>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-calculator"></i> 好药保报销计算器</h1>
+            <p>输入药品信息，立即计算报销金额和节省成本</p>
         </div>
-        <!-- Content -->
-        <div class="px-8 py-8 md:py-10">
-            <!-- Input Section -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-9">
-                <div class="flex flex-col">
-                    <label class="text-base font-semibold mb-2 text-gray-700 flex items-center">
-                        <i class="fas fa-prescription-bottle-alt text-blue-500 mr-2"></i>购买药品单盒价格
-                    </label>
-                    <input type="number" id="price" min="0" step="0.01" placeholder="请输入单盒价格" value="150"
-                        class="px-4 py-3 border-2 border-gray-200 rounded-lg text-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition outline-none">
-                    <span class="text-sm text-gray-500 mt-1 ml-1">元/盒</span>
+        
+        <div class="content">
+            <div class="input-section">
+                <div class="input-group">
+                    <label><i class="fas fa-prescription-bottle-alt"></i> 购买药品单盒价格</label>
+                    <input type="number" id="price" min="0" step="0.01" placeholder="请输入单盒价格" value="150">
+                    <span class="unit">元/盒</span>
                 </div>
-                <div class="flex flex-col">
-                    <label class="text-base font-semibold mb-2 text-gray-700 flex items-center">
-                        <i class="fas fa-boxes text-blue-500 mr-2"></i>每月需购药盒数
-                    </label>
-                    <input type="number" id="quantity" min="0" step="1" placeholder="请输入每月盒数" value="2"
-                        class="px-4 py-3 border-2 border-gray-200 rounded-lg text-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition outline-none">
-                    <span class="text-sm text-gray-500 mt-1 ml-1">盒/月</span>
+                
+                <div class="input-group">
+                    <label><i class="fas fa-boxes"></i> 每月需购药盒数</label>
+                    <input type="number" id="quantity" min="1" step="1" placeholder="请输入每月盒数" value="2">
+                    <span class="unit">盒/月</span>
                 </div>
             </div>
-            <!-- Results Section -->
-            <div class="bg-blue-50 rounded-xl p-6 mb-8">
-                <h2 class="text-blue-900 text-xl font-bold mb-5 pb-2 border-b border-gray-200 flex items-center">
-                    <i class="fas fa-chart-line mr-2"></i>计算结果
-                </h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-2" id="resultsGrid">
-                    <div class="bg-white p-5 rounded-lg shadow-sm border-l-4 border-blue-500 mb-2 result-item">
-                        <div class="text-sm text-gray-500 mb-1">月总药费</div>
-                        <div class="text-xl font-bold text-blue-900" id="totalCost">300.00<span class="text-blue-500 text-base ml-1">元</span></div>
+            
+            <div class="results-section">
+                <h2><i class="fas fa-chart-line"></i> 计算结果</h2>
+                <div class="results-grid">
+                    <div class="result-item">
+                        <div class="result-title">月总药费</div>
+                        <div class="result-value" id="totalCost">300.00<span class="result-unit">元</span></div>
                     </div>
-                    <div class="bg-white p-5 rounded-lg shadow-sm border-l-4 border-blue-500 mb-2 result-item">
-                        <div class="text-sm text-gray-500 mb-1">月度保费</div>
-                        <div class="text-xl font-bold text-blue-900" id="premium">54.20<span class="text-blue-500 text-base ml-1">元</span></div>
+                    
+                    <div class="result-item">
+                        <div class="result-title">月度保费</div>
+                        <div class="result-value" id="premium">54.20<span class="result-unit">元</span></div>
                     </div>
-                    <div class="bg-white p-5 rounded-lg shadow-sm border-l-4 border-blue-500 mb-2 result-item">
-                        <div class="text-sm text-gray-500 mb-1">理论最大报销额</div>
-                        <div class="text-xl font-bold text-blue-900" id="reimbursement">180.00<span class="text-blue-500 text-base ml-1">元</span></div>
+                    
+                    <div class="result-item">
+                        <div class="result-title">理论最大报销额</div>
+                        <div class="result-value" id="reimbursement">180.00<span class="result-unit">元</span></div>
                     </div>
-                    <div class="bg-white p-5 rounded-lg shadow-sm border-l-4 border-blue-500 mb-2 result-item">
-                        <div class="text-sm text-gray-500 mb-1">实际单次报销</div>
-                        <div class="text-xl font-bold text-blue-900" id="singleReimb">90.00<span class="text-blue-500 text-base ml-1">元</span></div>
+                    
+                    <div class="result-item">
+                        <div class="result-title">实际单次报销</div>
+                        <div class="result-value" id="singleReimb">90.00<span class="result-unit">元</span></div>
                     </div>
-                    <div class="bg-yellow-50 p-5 rounded-lg shadow-sm border-l-4 border-yellow-400 mb-2 result-item highlight" id="savingsItem">
-                        <div class="text-sm text-gray-500 mb-1">月节省成本</div>
-                        <div class="text-xl font-bold text-yellow-600" id="savings">125.80<span class="text-yellow-500 text-base ml-1">元</span></div>
+                    
+                    <div class="result-item highlight">
+                        <div class="result-title">月节省成本</div>
+                        <div class="result-value" id="savings">125.80<span class="result-unit">元</span></div>
                     </div>
-                    <div class="bg-white p-5 rounded-lg shadow-sm border-l-4 border-blue-500 mb-2 result-item">
-                        <div class="text-sm text-gray-500 mb-1">报销比例</div>
-                        <div class="text-xl font-bold text-blue-900" id="reimbRate">60.00<span class="text-blue-500 text-base ml-1">%</span></div>
+                    
+                    <div class="result-item">
+                        <div class="result-title">报销比例</div>
+                        <div class="result-value" id="reimbRate">60.00<span class="result-unit">%</span></div>
                     </div>
                 </div>
-                <!-- Recommendation -->
-                <div class="bg-blue-100 p-4 rounded-lg mt-6 border-l-4 border-blue-400">
-                    <h3 class="text-blue-600 font-semibold mb-2 flex items-center">
-                        <i class="fas fa-lightbulb mr-2"></i>购买建议
-                    </h3>
-                    <p class="text-gray-700 leading-relaxed" id="advice">
-                        月总药费300元，超过166.67元，建议分2次购买，每次150元，可报销90元/次，最大化利用报销额度。
-                    </p>
+                
+                <div class="recommendation">
+                    <h3><i class="fas fa-lightbulb"></i> 购买建议</h3>
+                    <p id="advice">月总药费300元，超过166.67元，建议分2次购买，每次150元，可报销90元/次，最大化利用报销额度。</p>
                 </div>
             </div>
-            <!-- Disclaimer -->
-            <div class="text-xs text-gray-500 mt-6 pt-4 border-t border-gray-200 leading-relaxed">
-                <strong>说明：</strong>好药保每月保费54.2元，可享受每月2次订单报销，每次报销订单金额的60%，最高100元/次，全年最高2400元。本计算器按照最优购买策略（最大化报销）计算。实际报销金额以保险公司审核为准。
+            
+            <div class="disclaimer">
+                <p><strong>说明：</strong>好药保每月保费54.2元，可享受每月2次订单报销，每次报销订单金额的60%，最高100元/次，全年最高2400元。本计算器按照最优购买策略（最大化报销）计算。实际报销金额以保险公司审核为准。</p>
             </div>
         </div>
-        <!-- Footer -->
-        <div class="text-center text-gray-400 text-sm py-4 border-t border-gray-200">
-            Created by JoyAgent<br>页面内容均由 AI 生成，仅供参考
+        
+        <div class="footer">
+            <p>好药保报销计算器 &copy; 2023 | 数据仅供参考，请以实际保单条款为准</p>
         </div>
     </div>
+
     <script>
         // 获取DOM元素
         const priceInput = document.getElementById('price');
         const quantityInput = document.getElementById('quantity');
+        
         // 结果元素
         const totalCostEl = document.getElementById('totalCost');
         const premiumEl = document.getElementById('premium');
@@ -100,69 +298,145 @@
         const savingsEl = document.getElementById('savings');
         const reimbRateEl = document.getElementById('reimbRate');
         const adviceEl = document.getElementById('advice');
-        const savingsItem = document.getElementById('savingsItem');
+        
         // 固定保费
         const PREMIUM = 54.2;
+        
         // 初始化显示
-        premiumEl.innerHTML = `${PREMIUM.toFixed(2)}<span class="text-blue-500 text-base ml-1">元</span>`;
+        premiumEl.innerHTML = `${PREMIUM.toFixed(2)}<span class="result-unit">元</span>`;
+        
         // 计算函数
         function calculate() {
             // 获取输入值
             const price = parseFloat(priceInput.value) || 0;
-            const quantity = parseInt(quantityInput.value) || 0;
+            const quantity = parseInt(quantityInput.value) || 1;
+            
+            // 确保最小值为1
+            if (quantity < 1) quantityInput.value = 1;
+            
             // 计算月总药费
             const totalCost = price * quantity;
+            
             // 计算理论最大报销额
-            let reimbursement = Math.min(totalCost * 0.6, 200);
-            // 计算实际单次报销（按平均每盒计算，不超过100元）
+            let reimbursement = 0;
+            let suggestion = "";
+            
+            if (quantity === 1) {
+                // 只有一盒，只能单次购买
+                reimbursement = Math.min(totalCost * 0.6, 100);
+                suggestion = "单次购买";
+            } else {
+                // 多盒，可以分次购买
+                // 计算最优分次方案
+                const maxReimbPerOrder = 100; // 每单最高报销
+                const reimbRate = 0.6; // 报销比例
+                
+                // 尝试不同的分次方案
+                let bestReimbursement = 0;
+                let bestSplit = 1;
+                
+                // 遍历所有可能的分次方案
+                for (let orders = 1; orders <= Math.min(quantity, 2); orders++) {
+                    let totalReimb = 0;
+                    
+                    // 将药品尽可能平均分配到各订单
+                    const boxesPerOrder = Math.floor(quantity / orders);
+                    const remainder = quantity % orders;
+                    
+                    for (let i = 0; i < orders; i++) {
+                        let boxesInThisOrder = boxesPerOrder;
+                        if (i < remainder) boxesInThisOrder++;
+                        
+                        const orderCost = boxesInThisOrder * price;
+                        const reimbForOrder = Math.min(orderCost * reimbRate, maxReimbPerOrder);
+                        totalReimb += reimbForOrder;
+                    }
+                    
+                    if (totalReimb > bestReimbursement) {
+                        bestReimbursement = totalReimb;
+                        bestSplit = orders;
+                    }
+                }
+                
+                reimbursement = bestReimbursement;
+                suggestion = bestSplit === 1 ? "单次购买" : "分2次购买";
+            }
+            
+            // 计算实际单次报销（按每盒计算）
             const singleReimb = quantity > 0 ? Math.min(price * 0.6, 100) : 0;
+            
             // 计算月节省成本
             const savings = reimbursement - PREMIUM;
+            
             // 计算实际报销比例（相对于总药费）
-            const reimbRate = totalCost > 0 ? Math.min(60, (reimbursement / totalCost * 100)) : 0;
+            const reimbRate = totalCost > 0 ? (reimbursement / totalCost * 100).toFixed(2) : "0.00";
+            
             // 更新结果
-            totalCostEl.innerHTML = `${totalCost.toFixed(2)}<span class="text-blue-500 text-base ml-1">元</span>`;
-            reimbursementEl.innerHTML = `${reimbursement.toFixed(2)}<span class="text-blue-500 text-base ml-1">元</span>`;
-            singleReimbEl.innerHTML = `${singleReimb.toFixed(2)}<span class="text-blue-500 text-base ml-1">元</span>`;
-            savingsEl.innerHTML = `${savings.toFixed(2)}<span class="text-yellow-500 text-base ml-1">元</span>`;
-            reimbRateEl.innerHTML = `${reimbRate.toFixed(2)}<span class="text-blue-500 text-base ml-1">%</span>`;
+            totalCostEl.innerHTML = `${totalCost.toFixed(2)}<span class="result-unit">元</span>`;
+            reimbursementEl.innerHTML = `${reimbursement.toFixed(2)}<span class="result-unit">元</span>`;
+            singleReimbEl.innerHTML = `${singleReimb.toFixed(2)}<span class="result-unit">元</span>`;
+            savingsEl.innerHTML = `${savings.toFixed(2)}<span class="result-unit">元</span>`;
+            reimbRateEl.innerHTML = `${reimbRate}<span class="result-unit">%</span>`;
+            
             // 更新建议
-            updateAdvice(price, quantity, totalCost, reimbursement, savings);
+            updateAdvice(price, quantity, totalCost, reimbursement, savings, suggestion);
+            
             // 高亮显示节省金额
             if (savings > 0) {
-                savingsItem.classList.add('bg-yellow-50', 'border-yellow-400');
-                savingsItem.classList.remove('bg-white', 'border-blue-500');
-                savingsEl.classList.add('text-yellow-600');
-                savingsEl.classList.remove('text-blue-900');
+                savingsEl.parentElement.classList.add('highlight');
+                savingsEl.parentElement.style.borderLeftColor = '#28a745';
+                savingsEl.style.color = '#28a745';
             } else {
-                savingsItem.classList.remove('bg-yellow-50', 'border-yellow-400');
-                savingsItem.classList.add('bg-white', 'border-blue-500');
-                savingsEl.classList.remove('text-yellow-600');
-                savingsEl.classList.add('text-blue-900');
+                savingsEl.parentElement.classList.remove('highlight');
+                savingsEl.parentElement.style.borderLeftColor = '#4b6cb7';
+                savingsEl.style.color = '#182848';
             }
         }
+        
         // 更新购买建议
-        function updateAdvice(price, quantity, totalCost, reimbursement, savings) {
+        function updateAdvice(price, quantity, totalCost, reimbursement, savings, suggestion) {
             let advice = "";
+            
             if (quantity === 0) {
-                advice = "您没有输入购药数量，请输入每月需购药盒数进行计算。";
+                advice = "请输入每月需购药盒数进行计算。";
             } else if (price === 0) {
-                advice = "您输入的药品价格为0，请输入正确的单盒价格进行计算。";
-            } else if (totalCost < 90.33) {
-                advice = `月总药费${totalCost.toFixed(2)}元，低于保本点90.33元，购买保险将多花费${(PREMIUM - reimbursement).toFixed(2)}元，不建议购买。`;
-            } else if (totalCost <= 166.67) {
-                const reimbAmount = Math.min(totalCost * 0.6, 100);
-                advice = `月总药费${totalCost.toFixed(2)}元，不超过166.67元，可单次购买，报销${reimbAmount.toFixed(2)}元，节省${savings.toFixed(2)}元。`;
+                advice = "请输入正确的单盒价格进行计算。";
+            } else if (quantity === 1) {
+                // 只有一盒的情况
+                if (totalCost < 90.33) {
+                    advice = `月总药费${totalCost.toFixed(2)}元，低于保本点90.33元，购买保险将多花费${(PREMIUM - reimbursement).toFixed(2)}元，不建议购买。`;
+                } else {
+                    const reimbAmount = Math.min(totalCost * 0.6, 100);
+                    advice = `每月仅购买1盒药品，只能单次购买，可报销${reimbAmount.toFixed(2)}元，${savings > 0 ? `节省${savings.toFixed(2)}元` : `多花费${Math.abs(savings).toFixed(2)}元`}。`;
+                }
             } else {
-                const perOrderCost = totalCost / 2;
-                const perOrderReimb = Math.min(perOrderCost * 0.6, 100);
-                advice = `月总药费${totalCost.toFixed(2)}元，超过166.67元，建议分2次购买，每次${perOrderCost.toFixed(2)}元，可报销${perOrderReimb.toFixed(2)}元/次，节省${savings.toFixed(2)}元。`;
+                // 多盒的情况
+                if (totalCost < 90.33) {
+                    advice = `月总药费${totalCost.toFixed(2)}元，低于保本点90.33元，购买保险将多花费${(PREMIUM - reimbursement).toFixed(2)}元，不建议购买。`;
+                } else if (suggestion === "单次购买") {
+                    advice = `月总药费${totalCost.toFixed(2)}元，建议单次购买所有药品，可报销${reimbursement.toFixed(2)}元，${savings > 0 ? `节省${savings.toFixed(2)}元` : `多花费${Math.abs(savings).toFixed(2)}元`}。`;
+                } else {
+                    // 分2次购买的情况
+                    // 计算如何分配
+                    let order1 = Math.ceil(quantity / 2);
+                    let order2 = quantity - order1;
+                    
+                    const cost1 = order1 * price;
+                    const cost2 = order2 * price;
+                    const reimb1 = Math.min(cost1 * 0.6, 100);
+                    const reimb2 = Math.min(cost2 * 0.6, 100);
+                    
+                    advice = `月总药费${totalCost.toFixed(2)}元，建议分2次购买：第1次购买${order1}盒(${cost1.toFixed(2)}元)，报销${reimb1.toFixed(2)}元；第2次购买${order2}盒(${cost2.toFixed(2)}元)，报销${reimb2.toFixed(2)}元。合计报销${reimbursement.toFixed(2)}元，${savings > 0 ? `节省${savings.toFixed(2)}元` : `多花费${Math.abs(savings).toFixed(2)}元`}。`;
+                }
             }
+            
             adviceEl.textContent = advice;
         }
+        
         // 添加事件监听
         priceInput.addEventListener('input', calculate);
         quantityInput.addEventListener('input', calculate);
+        
         // 页面加载时计算一次
         calculate();
     </script>
