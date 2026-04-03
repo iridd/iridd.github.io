@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>好药保报销计算器</title>
+    <title>好药保报销计算器（升级版）</title>
     <style>
         * {
             margin: 0;
@@ -311,21 +311,21 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1><i class="fas fa-calculator"></i> 好药保报销计算器</h1>
-            <p>输入药品信息，立即计算报销金额和节省成本</p>
+            <h1><i class="fas fa-calculator"></i> 好药保报销计算器（升级版）</h1>
+            <p>每次报销60%，单次最高200元，每月最多3次</p>
         </div>
         
         <div class="content">
             <div class="input-section">
                 <div class="input-group">
                     <label><i class="fas fa-prescription-bottle-alt"></i> 购买药品单盒价格</label>
-                    <input type="number" id="price" min="0" step="0.01" placeholder="请输入单盒价格" value="150">
+                    <input type="number" id="price" min="0" step="0.01" placeholder="请输入单盒价格" value="300">
                     <span class="unit">元/盒</span>
                 </div>
                 
                 <div class="input-group">
                     <label><i class="fas fa-boxes"></i> 每月需购药盒数</label>
-                    <input type="number" id="quantity" min="1" step="1" placeholder="请输入每月盒数" value="2">
+                    <input type="number" id="quantity" min="1" step="1" placeholder="请输入每月盒数" value="3">
                     <span class="unit">盒/月</span>
                 </div>
             </div>
@@ -335,7 +335,7 @@
                 <div class="results-grid">
                     <div class="result-item">
                         <div class="result-title">月总药费</div>
-                        <div class="result-value" id="totalCost">300.00<span class="result-unit">元</span></div>
+                        <div class="result-value" id="totalCost">900.00<span class="result-unit">元</span></div>
                     </div>
                     
                     <div class="result-item">
@@ -345,48 +345,47 @@
                     
                     <div class="result-item">
                         <div class="result-title">实际报销额</div>
-                        <div class="result-value" id="actualReimb">180.00<span class="result-unit">元</span></div>
+                        <div class="result-value" id="actualReimb">600.00<span class="result-unit">元</span></div>
                     </div>
                     
                     <div class="result-item highlight" id="savingsContainer">
                         <div class="result-title">月节省成本</div>
-                        <div class="result-value" id="savings">125.80<span class="result-unit">元</span></div>
+                        <div class="result-value" id="savings">545.80<span class="result-unit">元</span></div>
                     </div>
                     
                     <div class="result-item result-item-large" id="savingsRateContainer">
                         <div class="result-title">节省比例</div>
-                        <div class="result-value" id="savingsRate">41.93<span class="result-unit">%</span></div>
+                        <div class="result-value" id="savingsRate">60.64<span class="result-unit">%</span></div>
                     </div>
                 </div>
                 
                 <div class="recommendation" id="recommendationSection">
                     <h3><i class="fas fa-lightbulb"></i> 购买建议</h3>
-                    <p id="adviceSummary">基于您的药品需求，购买好药保每月可节省125.80元，节省比例为41.93%。</p>
+                    <p id="adviceSummary">基于您的药品需求，购买好药保每月可节省545.80元，节省比例为60.64%。</p>
                     <div class="decision decision-positive" id="decisionText">建议购买好药保</div>
                     
                     <div class="reimbursement-details" id="reimbDetails">
                         <h4><i class="fas fa-receipt"></i> 报销详情：</h4>
                         <ul>
                             <li>每月保费：<strong>54.20元</strong></li>
-                            <li>建议购买方式：<strong>分2次购买</strong></li>
-                            <li>每次购买：<strong>1盒</strong>（150元/次）</li>
-                            <li>每次报销：<strong>90.00元</strong>（150元 × 60%）</li>
-                            <li>月度总报销：<strong>180.00元</strong></li>
-                            <li>月节省成本：<strong>125.80元</strong></li>
-                            <li>节省比例：<strong>41.93%</strong>（节省金额 ÷ 总药费）</li>
+                            <li>建议购买方式：<strong>分3次购买</strong></li>
+                            <li>每次购买：<strong>1盒</strong>（300元/次），每次报销<strong>180.00元</strong></li>
+                            <li>月度总报销：<strong>540.00元</strong></li>
+                            <li>月节省成本：<strong>485.80元</strong></li>
+                            <li>节省比例：<strong>53.98%</strong></li>
                         </ul>
                     </div>
                 </div>
             </div>
             
             <div class="disclaimer">
-                <p><strong>说明：</strong>好药保每月保费54.2元，可享受每月2次订单报销，每次报销订单金额的60%，最高100元/次，全年最高2400元。本计算器按照最优购买策略（最大化报销）计算。实际报销金额以保险公司审核为准。</p>
+                <p><strong>说明：</strong>好药保每月保费54.2元，可享受每月最多3次订单报销，每次报销订单金额的60%，最高200元/次。本计算器按照最优购买策略（最大化报销）计算。实际报销金额以保险公司审核为准。</p>
                 <p><strong>计算公式：</strong>节省比例 = 月节省成本 ÷ 月总药费 × 100%。当节省成本为负数时，表示保费超过报销额，不建议购买。</p>
             </div>
         </div>
         
         <div class="footer">
-            <p>好药保报销计算器 &copy; 2026 | 数据仅供参考，请以实际保单条款为准</p>
+            <p>好药保报销计算器（升级版） &copy; 2023 | 数据仅供参考，请以实际保单条款为准</p>
         </div>
     </div>
 
@@ -410,124 +409,96 @@
         
         // 固定保费
         const PREMIUM = 54.2;
-        const BREAK_EVEN_POINT = PREMIUM / 0.6; // 保本点
+        // 新规则：单次报销上限200元，每月最多3次
+        const PER_ORDER_MAX_REIMB = 200;
+        const MAX_ORDERS_PER_MONTH = 3;
+        
+        // 计算保本点：即总药费*60% = 保费 时的总药费，但受次数和单次上限影响，这里用简单公式（假设单次无上限，但实际更复杂，仅作提示）
+        const BREAK_EVEN_POINT_SIMPLE = PREMIUM / 0.6; // 90.33元
         
         // 初始化显示
         premiumEl.innerHTML = `${PREMIUM.toFixed(2)}<span class="result-unit">元</span>`;
+        
+        // 核心计算：给定总盒数和单价，返回最优报销额、购买次数、每次分配详情
+        function calculateOptimalReimbursement(price, quantity) {
+            if (quantity === 0 || price === 0) return { totalReimb: 0, orders: 0, orderDetails: [] };
+            
+            let bestTotalReimb = 0;
+            let bestOrders = 0;
+            let bestOrderDetails = [];
+            
+            // 最多分 MAX_ORDERS_PER_MONTH 次，但不能超过盒数（每单至少1盒）
+            const maxPossibleOrders = Math.min(quantity, MAX_ORDERS_PER_MONTH);
+            
+            for (let orders = 1; orders <= maxPossibleOrders; orders++) {
+                // 将 quantity 分成 orders 份，尽可能平均
+                const base = Math.floor(quantity / orders);
+                const remainder = quantity % orders;
+                let totalReimb = 0;
+                let details = [];
+                
+                for (let i = 0; i < orders; i++) {
+                    let boxes = base;
+                    if (i < remainder) boxes++;
+                    const orderCost = boxes * price;
+                    const reimb = Math.min(orderCost * 0.6, PER_ORDER_MAX_REIMB);
+                    totalReimb += reimb;
+                    details.push({
+                        orderNum: i + 1,
+                        boxes: boxes,
+                        cost: orderCost,
+                        reimb: reimb
+                    });
+                }
+                
+                if (totalReimb > bestTotalReimb) {
+                    bestTotalReimb = totalReimb;
+                    bestOrders = orders;
+                    bestOrderDetails = details;
+                }
+            }
+            
+            return {
+                totalReimb: bestTotalReimb,
+                orders: bestOrders,
+                orderDetails: bestOrderDetails
+            };
+        }
         
         // 计算函数
         function calculate() {
             // 获取输入值
             const price = parseFloat(priceInput.value) || 0;
-            const quantity = parseInt(quantityInput.value) || 1;
+            let quantity = parseInt(quantityInput.value) || 1;
+            if (quantity < 1) quantity = 1;
+            quantityInput.value = quantity;
             
-            // 确保最小值为1
-            if (quantity < 1) quantityInput.value = 1;
-            
-            // 计算月总药费
+            // 月总药费
             const totalCost = price * quantity;
             
-            // 计算实际报销额和最优购买策略
-            let actualReimb = 0;
-            let strategy = "";
-            let orderDetails = [];
+            // 获取最优报销方案
+            const { totalReimb, orders, orderDetails } = calculateOptimalReimbursement(price, quantity);
+            const actualReimb = totalReimb;
             
-            if (quantity === 1) {
-                // 只有一盒，只能单次购买
-                actualReimb = Math.min(price * 0.6, 100);
-                strategy = "单次购买";
-                orderDetails = [{
-                    boxes: 1,
-                    cost: price,
-                    reimb: actualReimb
-                }];
-            } else {
-                // 多盒，计算最优分次方案
-                // 尝试所有可能的分次方案（1次或2次）
-                let bestReimbursement = 0;
-                let bestStrategy = "";
-                let bestOrderDetails = [];
-                
-                // 方案1：单次购买所有药品
-                let singleOrderReimb = Math.min(totalCost * 0.6, 100);
-                if (singleOrderReimb > bestReimbursement) {
-                    bestReimbursement = singleOrderReimb;
-                    bestStrategy = "单次购买";
-                    bestOrderDetails = [{
-                        boxes: quantity,
-                        cost: totalCost,
-                        reimb: singleOrderReimb
-                    }];
-                }
-                
-                // 方案2：分2次购买（最多2次）
-                if (quantity >= 2) {
-                    // 尝试不同分配方式
-                    const maxOrders = Math.min(quantity, 2);
-                    
-                    for (let orders = 2; orders <= maxOrders; orders++) {
-                        // 尽可能平均分配
-                        const boxesPerOrder = Math.floor(quantity / orders);
-                        const remainder = quantity % orders;
-                        
-                        let totalReimb = 0;
-                        let orderDetailsTemp = [];
-                        
-                        for (let i = 0; i < orders; i++) {
-                            let boxesInThisOrder = boxesPerOrder;
-                            if (i < remainder) boxesInThisOrder++;
-                            
-                            const orderCost = boxesInThisOrder * price;
-                            const reimbForOrder = Math.min(orderCost * 0.6, 100);
-                            totalReimb += reimbForOrder;
-                            
-                            orderDetailsTemp.push({
-                                boxes: boxesInThisOrder,
-                                cost: orderCost,
-                                reimb: reimbForOrder,
-                                orderNum: i + 1
-                            });
-                        }
-                        
-                        if (totalReimb > bestReimbursement) {
-                            bestReimbursement = totalReimb;
-                            bestStrategy = orders === 1 ? "单次购买" : "分2次购买";
-                            bestOrderDetails = orderDetailsTemp;
-                        }
-                    }
-                }
-                
-                actualReimb = bestReimbursement;
-                strategy = bestStrategy;
-                orderDetails = bestOrderDetails;
-            }
-            
-            // 计算月节省成本
+            // 节省成本
             const savings = actualReimb - PREMIUM;
+            // 节省比例
+            const savingsRate = totalCost > 0 ? ((savings / totalCost) * 100).toFixed(2) : "0.00";
             
-            // 计算节省比例（月节省成本 ÷ 月总药费）
-            const savingsRate = totalCost > 0 ? 
-                ((savings / totalCost) * 100).toFixed(2) : "0.00";
-            
-            // 更新结果
+            // 更新结果数值
             totalCostEl.innerHTML = `${totalCost.toFixed(2)}<span class="result-unit">元</span>`;
             actualReimbEl.innerHTML = `${actualReimb.toFixed(2)}<span class="result-unit">元</span>`;
             savingsEl.innerHTML = `${savings.toFixed(2)}<span class="result-unit">元</span>`;
             savingsRateEl.innerHTML = `${savingsRate}<span class="result-unit">%</span>`;
             
-            // 更新建议和报销详情
-            updateAdviceAndDetails(price, quantity, totalCost, PREMIUM, actualReimb, savings, 
-                                   savingsRate, strategy, orderDetails);
+            // 更新建议区域
+            updateAdviceAndDetails(price, quantity, totalCost, actualReimb, savings, savingsRate, orders, orderDetails);
             
-            // 高亮显示和样式调整
+            // 高亮样式
             updateHighlightsAndStyles(savings);
         }
         
-        // 更新建议和报销详情
-        function updateAdviceAndDetails(price, quantity, totalCost, premium, actualReimb, 
-                                        savings, savingsRate, strategy, orderDetails) {
-            
-            // 根据节省成本判断是否建议购买
+        function updateAdviceAndDetails(price, quantity, totalCost, actualReimb, savings, savingsRate, orders, orderDetails) {
             let adviceSummary = "";
             let decisionText = "";
             let decisionClass = "";
@@ -538,24 +509,21 @@
                 decisionText = "等待输入数据";
                 decisionClass = "";
             } else if (savings > 0) {
-                // 建议购买的情况
                 adviceSummary = `基于您的药品需求，购买好药保每月可节省${savings.toFixed(2)}元，节省比例为${savingsRate}%。`;
                 decisionText = "建议购买好药保";
                 decisionClass = "decision-positive";
             } else {
-                // 不建议购买的情况
                 const lossAmount = Math.abs(savings).toFixed(2);
                 adviceSummary = `基于您的药品需求，购买好药保每月将多花费${lossAmount}元，节省比例为${savingsRate}%。`;
                 decisionText = "不建议购买好药保";
                 decisionClass = "decision-negative";
             }
             
-            // 更新建议摘要和决策
             adviceSummaryEl.textContent = adviceSummary;
             decisionTextEl.textContent = decisionText;
             decisionTextEl.className = `decision ${decisionClass}`;
             
-            // 更新建议区域样式
+            // 更新推荐区域样式
             if (isRecommended) {
                 recommendationSection.classList.remove("warning-recommendation");
                 reimbDetailsEl.classList.remove("warning-details");
@@ -564,51 +532,37 @@
                 reimbDetailsEl.classList.add("warning-details");
             }
             
-            // 更新报销详情
+            // 构建报销详情
             let detailsHTML = `<h4><i class="fas fa-receipt"></i> 报销详情：</h4><ul>`;
-            
             if (quantity === 0 || price === 0) {
                 detailsHTML += `<li>请输入药品信息以查看详细计算结果。</li>`;
             } else {
-                detailsHTML += `<li>每月保费：<strong>${premium.toFixed(2)}元</strong></li>`;
-                
-                if (quantity === 1) {
-                    detailsHTML += `<li>购买方式：<strong>${strategy}</strong>（每月仅购买1盒）</li>`;
-                    const order = orderDetails[0];
-                    detailsHTML += `<li>单次购买：<strong>1盒</strong>（${order.cost.toFixed(2)}元）</li>`;
-                    detailsHTML += `<li>可报销：<strong>${order.reimb.toFixed(2)}元</strong>（${order.cost.toFixed(2)}元 × 60%）</li>`;
+                detailsHTML += `<li>每月保费：<strong>${PREMIUM.toFixed(2)}元</strong></li>`;
+                detailsHTML += `<li>建议购买方式：<strong>分${orders}次购买</strong>（每月最多3次，每次最高报销200元）</li>`;
+                if (orders === 1) {
+                    const detail = orderDetails[0];
+                    detailsHTML += `<li>单次购买：<strong>${detail.boxes}盒</strong>（${detail.cost.toFixed(2)}元）</li>`;
+                    detailsHTML += `<li>可报销：<strong>${detail.reimb.toFixed(2)}元</strong>（${detail.cost.toFixed(2)}元 × 60% = ${(detail.cost*0.6).toFixed(2)}元，上限200元）</li>`;
                 } else {
-                    detailsHTML += `<li>建议购买方式：<strong>${strategy}</strong></li>`;
-                    
-                    if (strategy === "单次购买") {
-                        const order = orderDetails[0];
-                        detailsHTML += `<li>单次购买：<strong>${order.boxes}盒</strong>（${order.cost.toFixed(2)}元）</li>`;
-                        detailsHTML += `<li>可报销：<strong>${order.reimb.toFixed(2)}元</strong>（${order.cost.toFixed(2)}元 × 60%）</li>`;
-                    } else {
-                        detailsHTML += `<li>购买方案：</li>`;
-                        orderDetails.forEach((order, index) => {
-                            detailsHTML += `<li>&nbsp;&nbsp;第${order.orderNum}次：<strong>${order.boxes}盒</strong>（${order.cost.toFixed(2)}元），报销<strong>${order.reimb.toFixed(2)}元</strong></li>`;
-                        });
-                    }
+                    detailsHTML += `<li>购买方案：</li>`;
+                    orderDetails.forEach(detail => {
+                        const theoretical = (detail.cost * 0.6).toFixed(2);
+                        detailsHTML += `<li>&nbsp;&nbsp;第${detail.orderNum}次：<strong>${detail.boxes}盒</strong>（${detail.cost.toFixed(2)}元），报销<strong>${detail.reimb.toFixed(2)}元</strong>（理论${theoretical}元，上限200元）</li>`;
+                    });
                 }
-                
                 detailsHTML += `<li>月度总报销：<strong>${actualReimb.toFixed(2)}元</strong></li>`;
                 detailsHTML += `<li>月节省成本：<strong>${savings.toFixed(2)}元</strong></li>`;
                 detailsHTML += `<li>节省比例：<strong>${savingsRate}%</strong>（节省金额 ÷ 总药费）</li>`;
                 
-                // 如果不建议购买，显示保本点
                 if (!isRecommended) {
-                    detailsHTML += `<li><strong>注意：</strong>月药费需达到<strong>${BREAK_EVEN_POINT.toFixed(2)}元</strong>才能保本，当前药费${totalCost.toFixed(2)}元低于此值。</li>`;
+                    detailsHTML += `<li><strong>注意：</strong>月药费需达到一定金额才能保本。当前药费${totalCost.toFixed(2)}元，报销后仍亏损。</li>`;
                 }
             }
-            
             detailsHTML += `</ul>`;
             reimbDetailsEl.innerHTML = detailsHTML;
         }
         
-        // 更新高亮显示和样式
         function updateHighlightsAndStyles(savings) {
-            // 月节省成本高亮
             if (savings > 0) {
                 savingsContainer.classList.remove('warning');
                 savingsContainer.classList.add('highlight');
@@ -621,7 +575,6 @@
                 savingsEl.style.color = '#dc3545';
             }
             
-            // 节省比例样式
             const savingsRateValue = parseFloat(savingsRateEl.textContent);
             if (savingsRateValue > 0) {
                 savingsRateContainer.classList.remove('warning');
@@ -635,7 +588,7 @@
             }
         }
         
-        // 添加事件监听
+        // 事件监听
         priceInput.addEventListener('input', calculate);
         quantityInput.addEventListener('input', calculate);
         
